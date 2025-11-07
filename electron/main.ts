@@ -14,7 +14,7 @@ function createWindow() {
     height: 800,
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.js'), // 由 tsconfig.electron 編成 CJS
       nodeIntegration: false,
       contextIsolation: true,
     },
@@ -22,12 +22,11 @@ function createWindow() {
   });
 
   if (isDev) {
-    // 開發環境：連到 Vite dev server
+    // 開發模式：連到 Vite dev server
     mainWindow.loadURL('http://localhost:5173');
     mainWindow.webContents.openDevTools();
   } else {
-    // 生產環境（打包後）：載入打包好的 index.html
-    // dist/public 是在 package.json 的 build 配置裡設定的 outDir
+    // 打包後：載入打包好的 index.html
     const indexPath = path.join(app.getAppPath(), 'dist', 'public', 'index.html');
     mainWindow.loadFile(indexPath);
   }
