@@ -1,6 +1,9 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const isDev = !app.isPackaged;
 
 let mainWindow: BrowserWindow | null = null;
@@ -24,9 +27,8 @@ function createWindow() {
     mainWindow.webContents.openDevTools();
   } else {
     // 生產環境：載入打包後的 index.html
-    // dist/public 是 Vite build 的輸出
     const indexPath = path.join(app.getAppPath(), 'dist', 'public', 'index.html');
-    mainWindow.loadFile(indexPath);
+    await mainWindow.loadFile(indexPath);
   }
 
   mainWindow.once('ready-to-show', () => {
