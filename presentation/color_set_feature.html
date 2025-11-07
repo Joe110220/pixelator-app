@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自訂顏色集管理</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F8F3E8;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: linear-gradient(135deg, #F8F3E8 0%, #FAF7F2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 60px 60px;
+            overflow: hidden;
+        }
+
+        /* Paper texture effect */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            align-items: center;
+        }
+
+        /* Left column - Image */
+        .image-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            order: 2;
+        }
+
+        .image-frame {
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Decorative frame accent */
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border: 3px solid #457B9D;
+            border-radius: 20px;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        /* Right column - Text content */
+        .text-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            order: 1;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: #E63946;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .title-underline {
+            width: 50px;
+            height: 4px;
+            background-color: #F4A261;
+            border-radius: 2px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #457B9D;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 15px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #E63946 0%, #F4A261 100%);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .feature-item:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, #457B9D 0%, #2B2D42 100%);
+        }
+
+        .feature-item:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, #F4A261 0%, #E63946 100%);
+        }
+
+        .feature-item:nth-child(4) .feature-icon {
+            background: linear-gradient(135deg, #2B2D42 0%, #457B9D 100%);
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-weight: 700;
+            color: #2B2D42;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: #2B2D42;
+            line-height: 1.5;
+            opacity: 0.85;
+        }
+
+        .highlight {
+            color: #E63946;
+            font-weight: 600;
+        }
+
+        /* Decorative elements */
+        .decoration-pattern {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            display: grid;
+            grid-template-columns: repeat(5, 16px);
+            gap: 8px;
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .pattern-cell {
+            width: 16px;
+            height: 16px;
+            background-color: #457B9D;
+        }
+
+        .pattern-cell:nth-child(3n) {
+            background-color: #F4A261;
+        }
+
+        .pattern-cell:nth-child(5n) {
+            background-color: #E63946;
+        }
+
+        .pattern-cell:nth-child(7n) {
+            background-color: #2B2D42;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="content-wrapper">
+            <!-- Right column - Text -->
+            <div class="text-column">
+                <div>
+                    <h1 class="page-title">自訂顏色集<br>管理</h1>
+                    <div class="title-underline"></div>
+                </div>
+
+                <p class="subtitle">匹配您的材料庫，精準統計所需拼豆</p>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">📋</div>
+                        <div class="feature-content">
+                            <div class="feature-title">顏色集管理</div>
+                            <div class="feature-text">手動新增、匯入、導出顏色集，靈活應對各種需求</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-content">
+                            <div class="feature-title">智能色彩匹配</div>
+                            <div class="feature-text">自動將圖片顏色匹配到<span class="highlight">最相近的可用顏色</span></div>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">📁</div>
+                        <div class="feature-content">
+                            <div class="feature-title">多種格式支援</div>
+                            <div class="feature-text">簡單的 TXT 文件格式，易於編輯和共享</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">✨</div>
+                        <div class="feature-content">
+                            <div class="feature-title">靈活應用</div>
+                            <div class="feature-text">根據您擁有的拼豆顏色進行設計，充分利用現有材料</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left column - Image -->
+            <div class="image-column">
+                <div class="image-frame">
+                    <img src="/home/ubuntu/pixelator_app/assets/slide6_colorset.png" alt="Custom Color Set Management">
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative pattern -->
+        <div class="decoration-pattern">
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+            <div class="pattern-cell"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1762415528510,
+      "tag": "0000_breezy_kate_bishop",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1762415561861,
+      "tag": "0001_massive_hex",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1762415972516,
+      "tag": "0002_powerful_black_knight",
+      "breakpoints": true
+    }
+  ]
+}

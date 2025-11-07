@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡單四步工作流</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F8F3E8;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: linear-gradient(135deg, #F8F3E8 0%, #FAF7F2 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 60px;
+            overflow: hidden;
+        }
+
+        /* Paper texture effect */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: #E63946;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .title-underline {
+            width: 80px;
+            height: 4px;
+            background-color: #457B9D;
+            border-radius: 2px;
+            margin: 0 auto;
+        }
+
+        .workflow-image-container {
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .workflow-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 350px;
+            object-fit: contain;
+        }
+
+        /* Decorative frame around image */
+        .workflow-image-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px dashed #F4A261;
+            border-radius: 10px;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .workflow-description {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 20px;
+        }
+
+        .step-description {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .step-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #457B9D;
+            margin-bottom: 8px;
+        }
+
+        .step-text {
+            font-size: 13px;
+            color: #2B2D42;
+            line-height: 1.5;
+        }
+
+        /* Decorative elements */
+        .decoration-top-left {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .decoration-bottom-right {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .decoration-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 12px);
+            gap: 5px;
+        }
+
+        .grid-cell {
+            width: 12px;
+            height: 12px;
+            background-color: #457B9D;
+        }
+
+        .grid-cell:nth-child(2) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(3) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(5) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(7) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(8) {
+            background-color: #457B9D;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Page header -->
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1 class="page-title">簡單四步<br>從圖片到拼豆設計</h1>
+                <div class="title-underline"></div>
+            </div>
+
+            <!-- Workflow image -->
+            <div class="workflow-image-container">
+                <img src="/home/ubuntu/pixelator_app/assets/slide8_workflow.png" alt="4-Step Workflow">
+            </div>
+
+            <!-- Step descriptions -->
+            <div class="workflow-description">
+                <div class="step-description">
+                    <div class="step-number">第 1 步</div>
+                    <div class="step-text">上傳圖片<br>選擇您想轉換的圖片</div>
+                </div>
+                <div class="step-description">
+                    <div class="step-number">第 2 步</div>
+                    <div class="step-text">調整參數<br>設定像素大小和顏色集</div>
+                </div>
+                <div class="step-description">
+                    <div class="step-number">第 3 步</div>
+                    <div class="step-text">生成預覽<br>一鍵生成拼豆預覽</div>
+                </div>
+                <div class="step-description">
+                    <div class="step-number">第 4 步</div>
+                    <div class="step-text">下載使用<br>保存預覽圖和統計數據</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative elements -->
+        <div class="decoration-top-left">
+            <div class="decoration-grid">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+        </div>
+
+        <div class="decoration-bottom-right">
+            <div class="decoration-grid">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

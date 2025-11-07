@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼豆預覽功能</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F8F3E8;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: linear-gradient(135deg, #F8F3E8 0%, #FAF7F2 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 60px;
+            overflow: hidden;
+        }
+
+        /* Paper texture effect */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            gap: 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: #E63946;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .title-underline {
+            width: 80px;
+            height: 4px;
+            background-color: #457B9D;
+            border-radius: 2px;
+            margin: 0 auto;
+        }
+
+        .image-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .image-frame {
+            max-width: 850px;
+            width: 100%;
+            position: relative;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            max-height: 280px;
+            object-fit: contain;
+        }
+
+        /* Decorative frame accent */
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            bottom: -12px;
+            border: 2px solid #F4A261;
+            border-radius: 15px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .benefits-section {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 5px;
+        }
+
+        .benefit-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .benefit-icon-1 {
+            background-color: rgba(230, 57, 70, 0.15);
+        }
+
+        .benefit-icon-2 {
+            background-color: rgba(69, 123, 157, 0.15);
+        }
+
+        .benefit-icon-3 {
+            background-color: rgba(244, 162, 97, 0.15);
+        }
+
+        .benefit-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #2B2D42;
+        }
+
+        .benefit-description {
+            font-size: 13px;
+            color: #2B2D42;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        /* Decorative elements */
+        .decoration-left {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .decoration-right {
+            position: absolute;
+            right: 20px;
+            bottom: 30px;
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .decoration-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 10px);
+            gap: 5px;
+        }
+
+        .grid-cell {
+            width: 10px;
+            height: 10px;
+            background-color: #457B9D;
+        }
+
+        .grid-cell:nth-child(2) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(5) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(8) {
+            background-color: #F4A261;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Page header -->
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1 class="page-title">看到真實的拼豆效果<br>設計更有把握</h1>
+                <div class="title-underline"></div>
+            </div>
+
+            <!-- Image section -->
+            <div class="image-section">
+                <div class="image-frame">
+                    <img src="/home/ubuntu/pixelator_app/assets/slide5_preview.png" alt="Bead Preview Feature">
+                </div>
+            </div>
+
+            <!-- Benefits section -->
+            <div class="benefits-section">
+                <div class="benefit-item">
+                    <div class="benefit-icon benefit-icon-1">🎨</div>
+                    <div class="benefit-title">圓形拼豆渲染</div>
+                    <div class="benefit-description">精確模擬真實拼豆的圓形外觀</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon benefit-icon-2">🎯</div>
+                    <div class="benefit-title">顏色還原</div>
+                    <div class="benefit-description">保留原始圖片的色彩信息</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon benefit-icon-3">✅</div>
+                    <div class="benefit-title">設計驗證</div>
+                    <div class="benefit-description">購買材料前確認最終效果</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative elements -->
+        <div class="decoration-left">
+            <div class="decoration-grid">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+        </div>
+
+        <div class="decoration-right">
+            <div class="decoration-grid">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

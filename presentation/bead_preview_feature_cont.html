@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼豆預覽的實際應用</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F8F3E8;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: linear-gradient(135deg, #F8F3E8 0%, #FAF7F2 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 60px;
+            overflow: hidden;
+        }
+
+        /* Paper texture effect */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            gap: 35px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: #E63946;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .title-underline {
+            width: 80px;
+            height: 4px;
+            background-color: #457B9D;
+            border-radius: 2px;
+            margin: 0 auto;
+        }
+
+        .applications-section {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .application-card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .app-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .app-icon-1 {
+            background-color: rgba(230, 57, 70, 0.15);
+        }
+
+        .app-icon-2 {
+            background-color: rgba(69, 123, 157, 0.15);
+        }
+
+        .app-icon-3 {
+            background-color: rgba(244, 162, 97, 0.15);
+        }
+
+        .app-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #2B2D42;
+        }
+
+        .app-description {
+            font-size: 14px;
+            color: #2B2D42;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        .benefits-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 10px;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .benefit-bullet {
+            width: 8px;
+            height: 8px;
+            background-color: #F4A261;
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .benefit-text {
+            font-size: 15px;
+            color: #2B2D42;
+            line-height: 1.6;
+        }
+
+        .benefit-highlight {
+            color: #E63946;
+            font-weight: 700;
+        }
+
+        .summary-box {
+            background-color: rgba(69, 123, 157, 0.08);
+            border-left: 4px solid #457B9D;
+            padding: 20px;
+            border-radius: 6px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .summary-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #457B9D;
+            margin-bottom: 10px;
+        }
+
+        .summary-text {
+            font-size: 14px;
+            color: #2B2D42;
+            line-height: 1.6;
+        }
+
+        /* Decorative elements */
+        .decoration-left {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .decoration-right {
+            position: absolute;
+            right: 20px;
+            bottom: 30px;
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .decoration-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 10px);
+            gap: 5px;
+        }
+
+        .grid-cell {
+            width: 10px;
+            height: 10px;
+            background-color: #457B9D;
+        }
+
+        .grid-cell:nth-child(2) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(5) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(8) {
+            background-color: #F4A261;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Page header -->
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1 class="page-title">實際應用場景<br>設計決策的好幫手</h1>
+                <div class="title-underline"></div>
+            </div>
+
+            <!-- Applications section -->
+            <div class="applications-section">
+                <div class="application-card">
+                    <div class="app-icon app-icon-1">📤</div>
+                    <div class="app-title">分享設計</div>
+                    <div class="app-description">下載預覽圖，與朋友分享您的拼豆創意，獲得意見反饋</div>
+                </div>
+
+                <div class="application-card">
+                    <div class="app-icon app-icon-2">💰</div>
+                    <div class="app-title">採購決策</div>
+                    <div class="app-description">購買材料前驗證設計效果，避免不必要的浪費和重複購買</div>
+                </div>
+
+                <div class="application-card">
+                    <div class="app-icon app-icon-3">✨</div>
+                    <div class="app-title">設計優化</div>
+                    <div class="app-description">根據預覽效果調整參數，不斷完善設計直到滿意</div>
+                </div>
+            </div>
+
+            <!-- Benefits section -->
+            <div class="benefits-section">
+                <div class="benefit-item">
+                    <div class="benefit-bullet"></div>
+                    <div class="benefit-text">
+                        <span class="benefit-highlight">減少風險：</span>在投入時間和金錢之前，確認設計的實際效果
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-bullet"></div>
+                    <div class="benefit-text">
+                        <span class="benefit-highlight">提高效率：</span>快速迭代設計，找到最佳的像素大小和顏色組合
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-bullet"></div>
+                    <div class="benefit-text">
+                        <span class="benefit-highlight">增強信心：</span>看到最終效果，放心地開始製作您的拼豆藝術作品
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary box -->
+            <div class="summary-box">
+                <div class="summary-title">💡 設計驗證的重要性</div>
+                <div class="summary-text">
+                    拼豆預覽功能讓您在製作前就能看到最終成品的樣子，這不僅節省時間和金錢，更重要的是讓您對設計充滿信心。無論是簡單的圖案還是複雜的肖像，預覽功能都能幫助您做出最佳的設計決策。
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative elements -->
+        <div class="decoration-left">
+            <div class="decoration-grid">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+        </div>
+
+        <div class="decoration-right">
+            <div class="decoration-grid">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

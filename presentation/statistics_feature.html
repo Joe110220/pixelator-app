@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精確的材料統計</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F8F3E8;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: linear-gradient(135deg, #F8F3E8 0%, #FAF7F2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 60px 60px;
+            overflow: hidden;
+        }
+
+        /* Paper texture effect */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            align-items: center;
+        }
+
+        /* Left column - Image */
+        .image-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            order: 2;
+        }
+
+        .image-frame {
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Decorative frame accent */
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border: 3px solid #457B9D;
+            border-radius: 20px;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        /* Right column - Text content */
+        .text-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            order: 1;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: #E63946;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .title-underline {
+            width: 50px;
+            height: 4px;
+            background-color: #F4A261;
+            border-radius: 2px;
+            margin-bottom: 20px;
+        }
+
+        .content-text {
+            font-size: 16px;
+            color: #2B2D42;
+            line-height: 1.7;
+        }
+
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            font-size: 15px;
+            color: #2B2D42;
+            line-height: 1.5;
+        }
+
+        .feature-bullet {
+            width: 6px;
+            height: 6px;
+            background-color: #E63946;
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .highlight {
+            color: #E63946;
+            font-weight: 600;
+        }
+
+        .benefit-box {
+            background-color: rgba(244, 162, 97, 0.1);
+            border-left: 4px solid #F4A261;
+            padding: 18px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .benefit-title {
+            font-weight: 700;
+            color: #F4A261;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .benefit-text {
+            font-size: 14px;
+            color: #2B2D42;
+            line-height: 1.6;
+        }
+
+        .stat-highlight {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(230, 57, 70, 0.2);
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: #E63946;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #2B2D42;
+            font-weight: 600;
+        }
+
+        /* Decorative elements */
+        .decoration-dots {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 10px);
+            gap: 6px;
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-1 { background-color: #E63946; }
+        .dot-2 { background-color: #F4A261; }
+        .dot-3 { background-color: #457B9D; }
+        .dot-4 { background-color: #E63946; }
+        .dot-5 { background-color: #F4A261; }
+        .dot-6 { background-color: #457B9D; }
+        .dot-7 { background-color: #E63946; }
+        .dot-8 { background-color: #F4A261; }
+        .dot-9 { background-color: #457B9D; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="content-wrapper">
+            <!-- Left column - Image -->
+            <div class="image-column">
+                <div class="image-frame">
+                    <img src="/home/ubuntu/pixelator_app/assets/slide7_statistics.png" alt="Material Statistics Dashboard">
+                </div>
+            </div>
+
+            <!-- Right column - Text -->
+            <div class="text-column">
+                <div>
+                    <h1 class="page-title">精確的<br>材料統計</h1>
+                    <div class="title-underline"></div>
+                </div>
+
+                <p class="content-text">
+                    一鍵生成完整的顏色和數量統計，讓您精確了解所需的拼豆材料。
+                </p>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <span><span class="highlight">自動統計</span> - 完整的顏色和數量統計</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <span><span class="highlight">詳細報表</span> - 色號、RGB 值、數量和百分比</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <span><span class="highlight">視覺化展示</span> - 進度條和統計圖表</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <span><span class="highlight">導出功能</span> - CSV 格式，可在 Excel 中處理</span>
+                    </div>
+                </div>
+
+                <div class="benefit-box">
+                    <div class="benefit-title">💡 採購規劃</div>
+                    <div class="benefit-text">根據統計結果精確採購所需的拼豆，避免浪費和不足。</div>
+                </div>
+
+                <div class="stat-highlight">
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">準確統計</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">秒級</div>
+                        <div class="stat-label">快速生成</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative dots -->
+        <div class="decoration-dots">
+            <div class="dot dot-1"></div>
+            <div class="dot dot-2"></div>
+            <div class="dot dot-3"></div>
+            <div class="dot dot-4"></div>
+            <div class="dot dot-5"></div>
+            <div class="dot dot-6"></div>
+            <div class="dot dot-7"></div>
+            <div class="dot dot-8"></div>
+            <div class="dot dot-9"></div>
+        </div>
+    </div>
+</body>
+</html>

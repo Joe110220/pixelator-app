@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼豆像素化工具 - 標題頁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F8F3E8;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: linear-gradient(135deg, #F8F3E8 0%, #FAF7F2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 80px;
+            overflow: hidden;
+        }
+
+        /* Paper texture effect */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Left section with icon */
+        .left-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .icon-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Decorative geometric frame */
+        .geometric-frame {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #E63946;
+            transform: rotate(15deg);
+            opacity: 0.3;
+        }
+
+        .geometric-frame::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #457B9D;
+            transform: rotate(-30deg) scale(0.85);
+            top: 50%;
+            left: 50%;
+            transform-origin: center;
+            opacity: 0.4;
+        }
+
+        /* App icon */
+        .app-icon {
+            width: 200px;
+            height: 200px;
+            background: white;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 3;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 30px;
+        }
+
+        /* Decorative bead-like circles around icon */
+        .bead-decoration {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .bead-1 { background-color: #E63946; top: -20px; left: 40px; }
+        .bead-2 { background-color: #F4A261; top: 10px; right: -20px; }
+        .bead-3 { background-color: #457B9D; bottom: 20px; right: -15px; }
+        .bead-4 { background-color: #F4A261; bottom: -15px; left: 50px; }
+        .bead-5 { background-color: #E63946; top: 50px; left: -25px; }
+
+        /* Right section with text */
+        .right-section {
+            flex: 1;
+            padding-left: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            color: #E63946;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #2B2D42;
+            line-height: 1.4;
+            margin-bottom: 40px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #457B9D;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Decorative hand-drawn style grid lines */
+        .grid-decoration {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            bottom: 40px;
+            right: 60px;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .grid-decoration svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Accent line */
+        .accent-line {
+            width: 60px;
+            height: 4px;
+            background-color: #F4A261;
+            margin-bottom: 30px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Left section with icon -->
+        <div class="left-section">
+            <div class="icon-container">
+                <div class="geometric-frame"></div>
+                <div class="app-icon">
+                    <img src="/home/ubuntu/pixelator_app/assets/icon.png" alt="拼豆像素化工具">
+                </div>
+                <div class="bead-decoration bead-1"></div>
+                <div class="bead-decoration bead-2"></div>
+                <div class="bead-decoration bead-3"></div>
+                <div class="bead-decoration bead-4"></div>
+                <div class="bead-decoration bead-5"></div>
+            </div>
+        </div>
+
+        <!-- Right section with text -->
+        <div class="right-section">
+            <div class="accent-line"></div>
+            <h1 class="title">拼豆像素化<br>工具</h1>
+            <h2 class="subtitle">將您的創意轉換為<br>精美的拼豆設計</h2>
+            <div class="tagline">
+                <span>✨</span>
+                <span>快速 · 智能 · 專業</span>
+            </div>
+        </div>
+
+        <!-- Decorative grid -->
+        <div class="grid-decoration">
+            <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="#457B9D" stroke-width="1.5" fill="none">
+                    <line x1="10" y1="10" x2="140" y2="10" stroke-dasharray="3,3"/>
+                    <line x1="10" y1="30" x2="140" y2="30" stroke-dasharray="3,3"/>
+                    <line x1="10" y1="50" x2="140" y2="50" stroke-dasharray="3,3"/>
+                    <line x1="10" y1="70" x2="140" y2="70" stroke-dasharray="3,3"/>
+                    <line x1="10" y1="90" x2="140" y2="90" stroke-dasharray="3,3"/>
+                    <line x1="10" y1="110" x2="140" y2="110" stroke-dasharray="3,3"/>
+                    <line x1="10" y1="130" x2="140" y2="130" stroke-dasharray="3,3"/>
+                    
+                    <line x1="10" y1="10" x2="10" y2="140" stroke-dasharray="3,3"/>
+                    <line x1="30" y1="10" x2="30" y2="140" stroke-dasharray="3,3"/>
+                    <line x1="50" y1="10" x2="50" y2="140" stroke-dasharray="3,3"/>
+                    <line x1="70" y1="10" x2="70" y2="140" stroke-dasharray="3,3"/>
+                    <line x1="90" y1="10" x2="90" y2="140" stroke-dasharray="3,3"/>
+                    <line x1="110" y1="10" x2="110" y2="140" stroke-dasharray="3,3"/>
+                    <line x1="130" y1="10" x2="130" y2="140" stroke-dasharray="3,3"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+</body>
+</html>

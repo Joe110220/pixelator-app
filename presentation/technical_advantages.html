@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專業級技術優勢</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F8F3E8;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: linear-gradient(135deg, #F8F3E8 0%, #FAF7F2 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 60px;
+            overflow: hidden;
+        }
+
+        /* Paper texture effect */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: #E63946;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .title-underline {
+            width: 80px;
+            height: 4px;
+            background-color: #457B9D;
+            border-radius: 2px;
+            margin: 0 auto;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .advantage-card {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .advantage-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .advantage-icon-1 {
+            background: linear-gradient(135deg, #E63946 0%, #F4A261 100%);
+            color: white;
+        }
+
+        .advantage-icon-2 {
+            background: linear-gradient(135deg, #457B9D 0%, #2B2D42 100%);
+            color: white;
+        }
+
+        .advantage-icon-3 {
+            background: linear-gradient(135deg, #F4A261 0%, #E63946 100%);
+            color: white;
+        }
+
+        .advantage-icon-4 {
+            background: linear-gradient(135deg, #2B2D42 0%, #457B9D 100%);
+            color: white;
+        }
+
+        .advantage-icon-5 {
+            background: linear-gradient(135deg, #457B9D 0%, #F4A261 100%);
+            color: white;
+        }
+
+        /* Decorative circle behind icon */
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .advantage-card:nth-child(1)::before {
+            background-color: #E63946;
+        }
+
+        .advantage-card:nth-child(2)::before {
+            background-color: #457B9D;
+        }
+
+        .advantage-card:nth-child(3)::before {
+            background-color: #F4A261;
+        }
+
+        .advantage-card:nth-child(4)::before {
+            background-color: #2B2D42;
+        }
+
+        .advantage-card:nth-child(5)::before {
+            background-color: #457B9D;
+        }
+
+        .advantage-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .advantage-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #2B2D42;
+        }
+
+        .advantage-description {
+            font-size: 14px;
+            color: #2B2D42;
+            line-height: 1.5;
+            opacity: 0.85;
+        }
+
+        /* Bottom highlight section */
+        .highlight-section {
+            background-color: rgba(69, 123, 157, 0.08);
+            border-left: 5px solid #457B9D;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .highlight-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #457B9D;
+            margin-bottom: 12px;
+        }
+
+        .highlight-text {
+            font-size: 15px;
+            color: #2B2D42;
+            line-height: 1.6;
+        }
+
+        /* Decorative elements */
+        .decoration-top-right {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .decoration-bottom-left {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            width: 50px;
+            height: 50px;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .decoration-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 12px);
+            gap: 5px;
+        }
+
+        .grid-cell {
+            width: 12px;
+            height: 12px;
+            background-color: #457B9D;
+        }
+
+        .grid-cell:nth-child(2) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(3) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(5) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(7) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(8) {
+            background-color: #457B9D;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Page header -->
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1 class="page-title">專業級技術優勢<br>為您的創意保駕護航</h1>
+                <div class="title-underline"></div>
+            </div>
+
+            <!-- Advantages grid -->
+            <div class="advantages-grid">
+                <!-- Advantage 1 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon advantage-icon-1">💻</div>
+                    <div class="advantage-content">
+                        <div class="advantage-title">本地運行</div>
+                        <div class="advantage-description">Windows 桌面應用，完全離線使用，數據隱私有保障</div>
+                    </div>
+                </div>
+
+                <!-- Advantage 2 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon advantage-icon-2">⚡</div>
+                    <div class="advantage-content">
+                        <div class="advantage-title">高效處理</div>
+                        <div class="advantage-description">採用先進的圖片處理算法，秒級完成轉換</div>
+                    </div>
+                </div>
+
+                <!-- Advantage 3 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon advantage-icon-3">🎯</div>
+                    <div class="advantage-content">
+                        <div class="advantage-title">精準匹配</div>
+                        <div class="advantage-description">歐幾里得距離算法，確保顏色匹配準確度</div>
+                    </div>
+                </div>
+
+                <!-- Advantage 4 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon advantage-icon-4">👥</div>
+                    <div class="advantage-content">
+                        <div class="advantage-title">用戶友好</div>
+                        <div class="advantage-description">直觀的界面設計，無需專業知識即可使用</div>
+                    </div>
+                </div>
+
+                <!-- Advantage 5 -->
+                <div class="advantage-card">
+                    <div class="advantage-icon advantage-icon-5">🔄</div>
+                    <div class="advantage-content">
+                        <div class="advantage-title">持續更新</div>
+                        <div class="advantage-description">開源架構，支援未來功能擴展和改進</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Highlight section -->
+            <div class="highlight-section">
+                <div class="highlight-title">🚀 為什麼選擇我們？</div>
+                <div class="highlight-text">
+                    我們的拼豆像素化工具結合了先進的技術和用戶友好的設計，讓您輕鬆將任何圖片轉換為精美的拼豆設計。無論您是拼豆初學者還是經驗豐富的手工藝愛好者，我們都能提供最佳的設計體驗。
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative elements -->
+        <div class="decoration-top-right">
+            <div class="decoration-grid">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+        </div>
+
+        <div class="decoration-bottom-left">
+            <div class="decoration-grid">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

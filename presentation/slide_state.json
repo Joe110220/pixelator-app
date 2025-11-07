@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "title": "拼豆像素化工具",
+    "created": 1762423207.8539453,
+    "last_updated": 1762423463.9003575,
+    "total_slides": 11
+  },
+  "slides": {
+    "title_slide": "edited",
+    "problem_opportunity": "edited",
+    "core_features": "edited",
+    "pixelation_feature": "edited",
+    "bead_preview_feature": "edited",
+    "bead_preview_feature_cont": "edited",
+    "color_set_feature": "edited",
+    "statistics_feature": "edited",
+    "workflow": "edited",
+    "technical_advantages": "edited",
+    "call_to_action": "edited"
+  },
+  "outline": [
+    {
+      "id": "title_slide",
+      "title": "拼豆像素化工具",
+      "summary": "將您的創意轉換為精美的拼豆設計 - 應用標題頁，展示核心價值主張",
+      "image_plan": "/home/ubuntu/pixelator_app/assets/icon.png - Image 1 is a professional-looking app icon made of colorful beads forming the letter 'B' (or a stylized pixel shape), which is perfect for a title slide about a bead pixelation tool.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "problem_opportunity",
+      "title": "為什麼需要拼豆像素化工具？",
+      "summary": "拼豆手工藝愛好者面臨的挑戰與市場機會，展示傳統方法的痛點和解決方案",
+      "image_plan": "/home/ubuntu/pixelator_app/assets/slide2_problem.png - Image 2 clearly illustrates the problem (manual, time-consuming process of converting images to bead designs) and the opportunity, directly matching the slide content.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "core_features",
+      "title": "三大核心功能",
+      "summary": "概覽圖片像素化、拼豆預覽和材料統計三大核心功能",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "pixelation_feature",
+      "title": "靈活的像素化控制",
+      "summary": "展示圖片像素化功能，支援多種格式和可調像素大小",
+      "image_plan": "/home/ubuntu/pixelator_app/assets/slide4_pixelate.png - Image 3 visually demonstrates the process of image pixelation and the effect of changing pixel size (1px to 100px), which aligns perfectly with the slide's focus on flexible pixelation control.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "bead_preview_feature",
+      "title": "看到真實的拼豆效果",
+      "summary": "展示拼豆預覽功能的核心價值 - 圓形拼豆渲染和顏色還原，讓用戶在購買材料前確認最終效果。包含拼豆預覽功能的演示圖片和核心特點說明。",
+      "image_plan": "/home/ubuntu/pixelator_app/assets/slide5_preview.png - 展示原圖、像素化版本和拼豆預覽的三段對比圖",
+      "slide_template_key": ""
+    },
+    {
+      "id": "bead_preview_feature_cont",
+      "title": "拼豆預覽的實際應用",
+      "summary": "介紹拼豆預覽功能的實際應用場景和優勢 - 如何通過預覽確認設計、下載預覽圖進行分享、以及設計驗證的重要性。強調該功能如何幫助用戶在製作前做出更好的設計決策。",
+      "slide_template_key": "",
+      "image_plan": ""
+    },
+    {
+      "id": "color_set_feature",
+      "title": "自訂顏色集管理",
+      "summary": "自訂顏色集功能，智能色彩匹配和顏色集管理",
+      "image_plan": "/home/ubuntu/pixelator_app/assets/slide6_colorset.png - Image 5 illustrates \"Custom Color Set Management\" by showing a list of colors/codes being matched to a pixelated design, directly supporting the slide's content about matching material libraries.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "statistics_feature",
+      "title": "精確的材料統計",
+      "summary": "材料統計功能展示，自動統計顏色和數量",
+      "image_plan": "/home/ubuntu/pixelator_app/assets/slide7_statistics.png - Image 6 is a \"Statistics Dashboard\" showing total beads, color varieties, a table of color codes/quantities, and a pie chart, which perfectly represents the material statistics function.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "workflow",
+      "title": "簡單四步工作流",
+      "summary": "展示從上傳圖片到下載使用的完整工作流程",
+      "image_plan": "/home/ubuntu/pixelator_app/assets/slide8_workflow.png - Image 7 shows a clear 4-step workflow (Upload, Adjust Parameters, Generate Preview, Download Results), which matches the slide's content on the simple four-step process.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "technical_advantages",
+      "title": "專業級技術優勢",
+      "summary": "本地運行、高效處理、精準匹配、用戶友好的技術特點",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "call_to_action",
+      "title": "立即開始",
+      "summary": "呼籲用戶下載應用、安裝運行、開始設計的行動頁面",
+      "image_plan": "",
+      "slide_template_key": ""
+    }
+  ]
+}

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>立即開始</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F8F3E8;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: linear-gradient(135deg, #F8F3E8 0%, #FAF7F2 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 60px;
+            overflow: hidden;
+        }
+
+        /* Paper texture effect */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 50px;
+        }
+
+        .header-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .main-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #E63946;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #2B2D42;
+            line-height: 1.6;
+            max-width: 700px;
+            opacity: 0.9;
+        }
+
+        .accent-line {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #457B9D 0%, #F4A261 100%);
+            border-radius: 2px;
+        }
+
+        /* Action steps section */
+        .action-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            width: 100%;
+            margin: 30px 0;
+        }
+
+        .step-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .step-icon-1 {
+            background: linear-gradient(135deg, #E63946 0%, #F4A261 100%);
+            color: white;
+        }
+
+        .step-icon-2 {
+            background: linear-gradient(135deg, #457B9D 0%, #2B2D42 100%);
+            color: white;
+        }
+
+        .step-icon-3 {
+            background: linear-gradient(135deg, #F4A261 0%, #E63946 100%);
+            color: white;
+        }
+
+        .step-icon-4 {
+            background: linear-gradient(135deg, #2B2D42 0%, #457B9D 100%);
+            color: white;
+        }
+
+        .step-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #2B2D42;
+        }
+
+        .step-description {
+            font-size: 13px;
+            color: #2B2D42;
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+
+        /* Closing message section */
+        .closing-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding: 30px;
+            background-color: rgba(69, 123, 157, 0.08);
+            border-left: 4px solid #457B9D;
+            border-radius: 8px;
+            max-width: 700px;
+        }
+
+        .closing-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #457B9D;
+        }
+
+        .closing-text {
+            font-size: 15px;
+            color: #2B2D42;
+            line-height: 1.6;
+        }
+
+        .cta-emphasis {
+            color: #E63946;
+            font-weight: 700;
+        }
+
+        /* Decorative elements */
+        .decoration-grid-1 {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            display: grid;
+            grid-template-columns: repeat(5, 12px);
+            gap: 6px;
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .decoration-grid-2 {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            display: grid;
+            grid-template-columns: repeat(5, 12px);
+            gap: 6px;
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .grid-cell {
+            width: 12px;
+            height: 12px;
+            background-color: #457B9D;
+        }
+
+        .grid-cell:nth-child(2) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(3) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(4) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(5) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(7) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(10) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(12) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(15) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(17) {
+            background-color: #457B9D;
+        }
+
+        .grid-cell:nth-child(20) {
+            background-color: #F4A261;
+        }
+
+        .grid-cell:nth-child(22) {
+            background-color: #E63946;
+        }
+
+        .grid-cell:nth-child(25) {
+            background-color: #457B9D;
+        }
+
+        /* Decorative corner shapes */
+        .corner-shape-1 {
+            position: absolute;
+            top: 100px;
+            right: 60px;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #F4A261;
+            opacity: 0.15;
+            z-index: 1;
+            transform: rotate(45deg);
+        }
+
+        .corner-shape-2 {
+            position: absolute;
+            bottom: 100px;
+            left: 60px;
+            width: 50px;
+            height: 50px;
+            border: 2px solid #457B9D;
+            border-radius: 50%;
+            opacity: 0.15;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <!-- Header section -->
+            <div class="header-section">
+                <h1 class="main-title">立即開始您的<br>拼豆設計之旅</h1>
+                <div class="accent-line"></div>
+                <p class="subtitle">
+                    用拼豆像素化工具，將您的創意轉換為精美的手工藝作品。簡單、快速、專業。
+                </p>
+            </div>
+
+            <!-- Action steps -->
+            <div class="action-steps">
+                <div class="step-card">
+                    <div class="step-icon step-icon-1">📥</div>
+                    <div class="step-title">下載應用</div>
+                    <div class="step-description">從官方渠道下載 Windows 應用程式</div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon step-icon-2">⚙️</div>
+                    <div class="step-title">安裝運行</div>
+                    <div class="step-description">按照安裝嚮導進行，無需複雜配置</div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon step-icon-3">🎨</div>
+                    <div class="step-title">開始設計</div>
+                    <div class="step-description">上傳圖片，調整參數，生成預覽</div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon step-icon-4">🌟</div>
+                    <div class="step-title">分享成果</div>
+                    <div class="step-description">與朋友分享您的設計，展示創意</div>
+                </div>
+            </div>
+
+            <!-- Closing message -->
+            <div class="closing-section">
+                <div class="closing-title">🚀 加入拼豆設計社群</div>
+                <div class="closing-text">
+                    與全球拼豆愛好者交流經驗、分享靈感，一起創造更多精美的拼豆藝術作品。
+                    <br><br>
+                    <span class="cta-emphasis">立即下載，開始您的創意之旅！</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative elements -->
+        <div class="decoration-grid-1">
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+        </div>
+
+        <div class="decoration-grid-2">
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+        </div>
+
+        <!-- Corner decorative shapes -->
+        <div class="corner-shape-1"></div>
+        <div class="corner-shape-2"></div>
+    </div>
+</body>
+</html>
