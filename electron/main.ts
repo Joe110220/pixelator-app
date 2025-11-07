@@ -2,15 +2,17 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const isDev = !app.isPackaged; // 取代 electron-is-dev
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const isDev = !app.isPackaged;
 
 let mainWindow: BrowserWindow | null = null;
 
-const createWindow = () => {
+function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
+    show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
@@ -21,9 +23,13 @@ const createWindow = () => {
 
   const startUrl = isDev
     ? 'http://localhost:5173'
-    : `file://${path.join(__dirname, '../dist/public/index.html')}`;
+    : `file://${path.join(app.getAppPath(), 'dist', 'public', 'index.html')}`;
 
   mainWindow.loadURL(startUrl);
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow && mainWindow.show();
+  });
 
   if (isDev) {
     mainWindow.webContents.openDevTools();
@@ -32,9 +38,9 @@ const createWindow = () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-};
+}
 
-app.on('ready', createWindow);
+app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -43,12 +49,11 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-  if (mainWindow === null) {
+  if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
 });
 
-// IPC 處理程序（如果需要）
 ipcMain.handle('get-app-path', () => {
   return app.getAppPath();
 });
