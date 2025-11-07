@@ -21,19 +21,20 @@ function createWindow() {
     icon: path.join(__dirname, '../assets/icon.png'),
   });
 
-  const startUrl = isDev
-    ? 'http://localhost:5173'
-    : `file://${path.join(app.getAppPath(), 'dist', 'public', 'index.html')}`;
-
-  mainWindow.loadURL(startUrl);
+  if (isDev) {
+    // 開發環境：連到 Vite dev server
+    mainWindow.loadURL('http://localhost:5173');
+    mainWindow.webContents.openDevTools();
+  } else {
+    // 生產環境（打包後）：載入打包好的 index.html
+    // dist/public 是在 package.json 的 build 配置裡設定的 outDir
+    const indexPath = path.join(app.getAppPath(), 'dist', 'public', 'index.html');
+    mainWindow.loadFile(indexPath);
+  }
 
   mainWindow.once('ready-to-show', () => {
-    mainWindow && mainWindow.show();
+    if (mainWindow) mainWindow.show();
   });
-
-  if (isDev) {
-    mainWindow.webContents.openDevTools();
-  }
 
   mainWindow.on('closed', () => {
     mainWindow = null;
