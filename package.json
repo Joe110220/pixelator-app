@@ -130,6 +130,7 @@
       "output": "dist-electron"
     "extraMetadata": {
       "type": "commonjs"
+      }
     },
     "files": [
       "dist/**/*",
