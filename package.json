@@ -122,15 +122,15 @@
       "tailwindcss>nanoid": "3.3.7"
     }
   },
-  "build": {
-    "appId": "com.pixelator.app",
-    "productName": "拼豆像素化工具",
+    "build": {
+    "appId": "pixelator_app",
+    "productName": "pixelator_app",
+    "buildResources": "assets",
     "directories": {
-      "buildResources": "assets",
       "output": "dist-electron"
+    },
     "extraMetadata": {
       "type": "commonjs"
-      }
     },
     "files": [
       "dist/**/*",
