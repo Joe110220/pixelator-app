@@ -1,9 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const isDev = !app.isPackaged;
 
 let mainWindow: BrowserWindow | null = null;
@@ -14,7 +11,7 @@ function createWindow() {
     height: 800,
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'), // 由 tsconfig.electron 編成 CJS
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
     },
@@ -22,11 +19,12 @@ function createWindow() {
   });
 
   if (isDev) {
-    // 開發模式：連到 Vite dev server
+    // 開發環境：連到 Vite dev server
     mainWindow.loadURL('http://localhost:5173');
     mainWindow.webContents.openDevTools();
   } else {
-    // 打包後：載入打包好的 index.html
+    // 生產環境：載入打包後的 index.html
+    // dist/public 是 Vite build 的輸出
     const indexPath = path.join(app.getAppPath(), 'dist', 'public', 'index.html');
     mainWindow.loadFile(indexPath);
   }
