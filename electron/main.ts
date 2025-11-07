@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,19 +14,20 @@ async function createWindow() {
     height: 800,
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      // ✅ 用 ESM 方式載入 preload：給 URL，而不是一般檔案路徑
+      preload: pathToFileURL(path.join(__dirname, "preload.js")).href,
+      contextIsolation: true,
       nodeIntegration: false,
-      contextIsolation: true
     },
-    icon: path.join(__dirname, "../assets/icon.png")
+    icon: path.join(__dirname, "../assets/icon.png"),
   });
 
   if (isDev) {
-    // 開發模式：連到 Vite dev server
+    // 開發環境：連 Vite dev server
     await mainWindow.loadURL("http://localhost:5173");
     mainWindow.webContents.openDevTools();
   } else {
-    // 生產模式：載入打包好的前端
+    // 生產環境：載入打包後的 index.html
     const indexPath = path.join(app.getAppPath(), "dist", "public", "index.html");
     await mainWindow.loadFile(indexPath);
   }
@@ -40,7 +41,9 @@ async function createWindow() {
   });
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  void createWindow();
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
