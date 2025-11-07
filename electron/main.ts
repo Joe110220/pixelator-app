@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
-import { fileURLToPath, pathToFileURL } from "url";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,20 +14,20 @@ async function createWindow() {
     height: 800,
     show: false,
     webPreferences: {
-      // ✅ 用 ESM 方式載入 preload：給 URL，而不是一般檔案路徑
-      preload: pathToFileURL(path.join(__dirname, "preload.js")).href,
+      // 使用 ESM preload（由 preload.mts 編譯出的 preload.mjs）
+      preload: path.join(__dirname, "preload.mjs"),
       contextIsolation: true,
-      nodeIntegration: false,
+      nodeIntegration: false
     },
-    icon: path.join(__dirname, "../assets/icon.png"),
+    icon: path.join(__dirname, "../assets/icon.png")
   });
 
   if (isDev) {
-    // 開發環境：連 Vite dev server
+    // 開發模式：連到 Vite dev server
     await mainWindow.loadURL("http://localhost:5173");
     mainWindow.webContents.openDevTools();
   } else {
-    // 生產環境：載入打包後的 index.html
+    // 生產模式：載入打包後的前端
     const indexPath = path.join(app.getAppPath(), "dist", "public", "index.html");
     await mainWindow.loadFile(indexPath);
   }
