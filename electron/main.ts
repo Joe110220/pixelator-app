@@ -1,9 +1,9 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
-import isDev from 'electron-is-dev';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const isDev = !app.isPackaged; // 取代 electron-is-dev
 
 let mainWindow: BrowserWindow | null = null;
 
