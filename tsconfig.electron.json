@@ -22,7 +22,10 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["electron/**/*.ts"],
+  "include": [
+    "electron/**/*.ts",
+    "electron/**/*.mts"
+  ],
   "exclude": [
     "node_modules",
     "dist",
