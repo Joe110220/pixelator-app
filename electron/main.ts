@@ -1,9 +1,6 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const isDev = !app.isPackaged;
 
 let mainWindow: BrowserWindow | null = null;
@@ -14,8 +11,7 @@ async function createWindow() {
     height: 800,
     show: false,
     webPreferences: {
-      // 使用 ESM preload（由 preload.mts 編譯出的 preload.mjs）
-      preload: path.join(__dirname, "preload.mjs"),
+      preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
       nodeIntegration: false
     },
@@ -27,13 +23,15 @@ async function createWindow() {
     await mainWindow.loadURL("http://localhost:5173");
     mainWindow.webContents.openDevTools();
   } else {
-    // 生產模式：載入打包後的前端
+    // 生產模式：載入打包好的前端
     const indexPath = path.join(app.getAppPath(), "dist", "public", "index.html");
     await mainWindow.loadFile(indexPath);
   }
 
   mainWindow.once("ready-to-show", () => {
-    if (mainWindow) mainWindow.show();
+    if (mainWindow) {
+      mainWindow.show();
+    }
   });
 
   mainWindow.on("closed", () => {
